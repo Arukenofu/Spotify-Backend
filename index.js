@@ -4,7 +4,7 @@ const cors = require('cors');
 const {join} = require("path");
 const fs = require('fs');
 require('dotenv').config()
-const routes = require('./router/router')
+const routes = require('./router/api')
 const {pool} = require("./db/db.pool");
 
 const app = express();
