@@ -1,36 +1,36 @@
 const express = require('express')
 
-const checkTokenMiddleware = require("../middlewares/checkToken.middleware");
+const checkTokenMiddleware = require("./middlewares/checkToken.middleware");
 const router = express.Router();
 
-const register = require('./controllers/register.route')
+const register = require('./controllers/register.controller')
 router.post('/register', register);
 
-const login = require('./controllers/login.route')
+const login = require('./controllers/login.controller')
 router.post('/login', login);
 
-const checkToken = require('./controllers/check-token.route')
+const checkToken = require('./controllers/check-token.controller')
 router.get('/checkToken', checkTokenMiddleware, checkToken)
 
-const users = require('./controllers/users.route')
+const users = require('./controllers/users.controller')
 router.get('/users', users)
 
-const musics = require('./controllers/musics.route')
+const musics = require('./controllers/musics.controller')
 router.get('/musics', musics);
 
-const singleMusic = require('./controllers/single-music.route')
+const singleMusic = require('./controllers/single-music.controller')
 router.get('/musics/:id', checkTokenMiddleware, singleMusic);
 
-const albums = require("./controllers/albums.route");
+const albums = require("./controllers/albums.controller");
 router.get('/albums/', albums);
 
-const getAlbum = require("./controllers/get-album.route");
+const getAlbum = require("./controllers/get-album.controller");
 router.get('/albums/:id', checkTokenMiddleware, getAlbum);
 
-const getColors = require("./controllers/get-colors.route");
+const getColors = require("./controllers/get-colors.controller");
 router.post('/color', getColors)
 
-const avatar = require('./controllers/avatar.route');
+const avatar = require('./controllers/avatar.controller');
 router.post('/avatar', avatar);
 
 module.exports = router;
