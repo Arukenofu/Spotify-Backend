@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
         if (!isPasswordValid) {
             return res.status(401).json({ message: 'Incorrect username or password' });
         }
-        res.status(201).json(token)
+        res.status(201).json({token: token, email: user.email, username: user.username, avatar: user.avatar})
     } catch (error) {
         res.status(400).json({ message: 'Authentication error' });
     }
