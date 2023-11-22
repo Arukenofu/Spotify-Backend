@@ -1,6 +1,6 @@
 const express = require('express')
-
 const checkTokenMiddleware = require("./middlewares/checkToken.middleware");
+
 const api = express.Router();
 
 const register = require('./controllers/register.controller')
@@ -14,6 +14,9 @@ api.get('/checkToken', checkTokenMiddleware, checkToken)
 
 const users = require('./controllers/users.controller')
 api.get('/users', users)
+
+const getUser = require('./controllers/get-user.controller');
+api.post('/user', checkTokenMiddleware, getUser);
 
 const musics = require('./controllers/musics.controller')
 api.get('/musics', musics);
@@ -30,7 +33,10 @@ api.get('/albums/:id', checkTokenMiddleware, getAlbum);
 const getColors = require("./controllers/get-colors.controller");
 api.post('/color', getColors)
 
-const avatar = require('./controllers/avatar.controller');
-api.post('/avatar', avatar);
+const updateProfile = require('./controllers/updateProfile.controller');
+api.post('/update', checkTokenMiddleware, updateProfile);
+
+const setPlayingMusic = require('./controllers/setPlayingMusic.controller');
+api.post('/updateMusic', checkTokenMiddleware, setPlayingMusic);
 
 module.exports = api;

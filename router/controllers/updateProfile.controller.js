@@ -1,0 +1,36 @@
+const fs = require('fs');
+const {pool} = require("../../db/db.pool");
+
+module.exports = async (req, res) => {
+    const {id, name, description, gender, location, image} = req.body;
+    if (name.length) {
+        await pool.query('UPDATE users SET username = $2 WHERE id = $1', [id, name])
+    }
+    if (description.length) {
+        await pool.query('UPDATE users SET description = $2 WHERE id = $1', [id, description])
+    }
+    if (gender.length) {
+        await pool.query('UPDATE users SET gender = $2 WHERE id = $1', [id, gender.toLowerCase()])
+    }
+    if (location.length) {
+        await pool.query('UPDATE users SET location = $2 WHERE id = $1', [id, location])
+    }
+    if (image.length) {
+        const base64data = image.replace(/^data:image\/png;base64,/, "");
+
+        if (fs.existsSync(`images/users/${id}`)) {
+
+        } else {
+            fs.mkdir(`images/users/${id}`, (err) => {
+                console.log(err)
+            })
+        }
+        fs.writeFile(`images/users/${id}/avatar.png`, base64data, 'base64', () => {})
+        await pool.query('UPDATE users SET avatar = $2 WHERE id = $1', [id, `http://localhost:3000/images/users/${id}/avatar.png`])
+    }
+    const response = await pool.query('SELECT * FROM users WHERE id = $1', [id])
+    const user = response.rows[0]
+    console.log(user)
+
+    res.json({username: user.username, avatar: user.avatar})
+}
