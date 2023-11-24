@@ -7,4 +7,5 @@ module.exports = async (req, res) => {
     const data = await pool.query('SELECT * FROM musicdata WHERE id = $1', [id]);
 
     res.json(data.rows[0]);
+    // получает музыку по id
 }

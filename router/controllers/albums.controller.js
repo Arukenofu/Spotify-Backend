@@ -26,6 +26,7 @@ module.exports = async (req, res) => {
         ') AS album;');
 
     response.rows[0].serialized_result.sort((a, b) => a.id - b.id);
+    // фильтрация по id
     let data = response.rows[0].serialized_result;
 
     await res.json(data);

@@ -9,4 +9,6 @@ module.exports = async (req, res) => {
 
     const data = await getColors(image)
     res.json(data.map(color => color.hex()))
+
+    // получает ссылку на изображение и возвращает масссив доминирующих цветов в виде hex
 }

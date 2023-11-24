@@ -17,15 +17,18 @@ module.exports = async (req, res) => {
     }
     if (image.length) {
         const base64data = image.replace(/^data:image\/png;base64,/, "");
+        // получает изображение в виде base64
 
         if (fs.existsSync(`images/users/${id}`)) {
-
+            // если папка с айди юзера существует, ничего не делает
         } else {
             fs.mkdir(`images/users/${id}`, (err) => {
                 console.log(err)
             })
+            // если его не существует, создаёт папку с id пользователя
         }
         fs.writeFile(`images/users/${id}/avatar.png`, base64data, 'base64', () => {})
+        // пишет/обновляет файл с названием avatar, сконвертированный из base64 в файл с расширением .png
         await pool.query('UPDATE users SET avatar = $2 WHERE id = $1', [id, `http://localhost:3000/images/users/${id}/avatar.png`])
     }
     const response = await pool.query('SELECT * FROM users WHERE id = $1', [id])

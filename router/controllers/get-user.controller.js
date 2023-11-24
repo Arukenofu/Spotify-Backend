@@ -6,6 +6,6 @@ module.exports = async (req, res) => {
     }
 
     const response = await pool.query('SELECT * FROM users WHERE id = $1', [id])
-    // console.log(response.rows)
+    // получает пользователя по айди
     res.json(response.rows);
 }

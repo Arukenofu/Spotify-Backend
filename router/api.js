@@ -11,6 +11,7 @@ api.post('/login', login);
 
 const checkToken = require('./controllers/check-token.controller')
 api.get('/checkToken', checkTokenMiddleware, checkToken)
+// 1 параметр роут, второй мидлвейл, третий контроллер
 
 const users = require('./controllers/users.controller')
 api.get('/users', users)
@@ -38,5 +39,8 @@ api.post('/update', checkTokenMiddleware, updateProfile);
 
 const setPlayingMusic = require('./controllers/setPlayingMusic.controller');
 api.post('/updateMusic', checkTokenMiddleware, setPlayingMusic);
+
+const deleteAccount = require('./controllers/deleteAccount.controller');
+api.post('/deleteAccount', checkTokenMiddleware, deleteAccount)
 
 module.exports = api;

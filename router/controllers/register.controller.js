@@ -22,6 +22,7 @@ module.exports = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
+    // создаёт хэшированный пароль, второй параметр это соль
     try {
         await pool.query(
             'INSERT INTO users (email, username, password) VALUES ($1, $2, $3) RETURNING id',

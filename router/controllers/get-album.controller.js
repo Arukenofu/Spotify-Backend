@@ -17,5 +17,4 @@ module.exports = async (req, res) => {
         '        having albums.id = $1' +
         ') AS album;', [id]);
 
-
 }

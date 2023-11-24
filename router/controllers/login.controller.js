@@ -14,7 +14,9 @@ module.exports = async (req, res) => {
 
         const user = result.rows[0];
         const isPasswordValid = await bcrypt.compare(password, user.password);
+        // сравнивает пароль из заголовка и хэшированный пароль из БД
         const token = jwt.sign({ userId: user.id, email: user.email }, process.env.MY_SECRET, {expiresIn: "2h"});
+        // создаёт токен из .env которое исчезает через 2 часа
 
         if (!isPasswordValid) {
             return res.status(401).json({ message: 'Incorrect username or password' });
