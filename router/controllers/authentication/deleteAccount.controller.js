@@ -1,4 +1,4 @@
-const {pool} = require("../../db/db.pool");
+const {pool} = require("../../../db/db.pool");
 const bcrypt = require("bcrypt");
 module.exports = async (req, res) => {
     const {id, email, password} = req.body;

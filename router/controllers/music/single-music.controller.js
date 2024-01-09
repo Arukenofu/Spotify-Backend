@@ -1,4 +1,4 @@
-const {pool} = require("../../db/db.pool");
+const {pool} = require("../../../db/db.pool");
 
 
 module.exports = async (req, res) => {

@@ -1,4 +1,4 @@
-const {pool} = require("../../db/db.pool");
+const {pool} = require("../../../db/db.pool");
 module.exports = async (req, res) => {
 
     const response = await pool.query('SELECT jsonb_agg(album) AS serialized_result\n' +

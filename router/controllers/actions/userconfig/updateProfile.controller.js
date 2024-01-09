@@ -1,18 +1,18 @@
 const fs = require('fs');
-const {pool} = require("../../db/db.pool");
+const {pool} = require("../../../../db/db.pool");
 
 module.exports = async (req, res) => {
     const {id, name, description, gender, location, image} = req.body;
     if (name.length) {
         await pool.query('UPDATE users SET username = $2 WHERE id = $1', [id, name])
     }
-    if (description.length) {
+    if (typeof description !== 'undefined') {
         await pool.query('UPDATE users SET description = $2 WHERE id = $1', [id, description])
     }
     if (gender.length) {
         await pool.query('UPDATE users SET gender = $2 WHERE id = $1', [id, gender.toLowerCase()])
     }
-    if (location.length) {
+    if (location?.length) {
         await pool.query('UPDATE users SET location = $2 WHERE id = $1', [id, location])
     }
     if (image.length) {
