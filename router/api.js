@@ -49,6 +49,9 @@ api.post('/userVisibility', checkTokenMiddleware, changeUser);
 const changeMusicVisibility = require('./controllers/actions/userconfig/changeVisibilityMusic.controller');
 api.post('/musicVisibility', checkTokenMiddleware, changeMusicVisibility);
 
+const changeFavoriteVisibility = require('./controllers/actions/userconfig/changeFavoriteVisibility.controller');
+api.post('/changeFavoriteVisibility', checkTokenMiddleware, changeFavoriteVisibility);
+
 const privateUserSettings = require('./controllers/user/userPrivate.controller');
 api.post('/private', checkTokenMiddleware, privateUserSettings);
 
@@ -64,8 +67,11 @@ api.post('/addFavorite', checkTokenMiddleware, addToFavorites);
 const deleteFavorite = require('./controllers/actions/favorite/deleteFavorite.controller');
 api.post('/deleteFavorite', checkTokenMiddleware, deleteFavorite);
 
-const getFavorite = require('./controllers/actions/favorite/getFavorite.controller');
-api.post('/getFavorites', getFavorite);
+const getFavorites = require('./controllers/actions/favorite/getFavorite.controller');
+api.post('/getFavorites', getFavorites);
+
+const getFavorite = require('./controllers/actions/favorite/getFavorite-safe.controller');
+api.post('/getFavorite', checkTokenMiddleware, getFavorite);
 
 const isLiked = require('./controllers/actions/favorite/isLiked.controller');
 api.post('/isLiked', checkTokenMiddleware, isLiked);
