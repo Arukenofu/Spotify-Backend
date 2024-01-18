@@ -17,7 +17,6 @@ module.exports = async (req, res) => {
     }
     if (image.length) {
         const base64data = image.replace(/^data:image\/png;base64,/, "");
-        // получает изображение в виде base64
 
         if (fs.existsSync(`images/users/${id}`)) {
             // если папка с айди юзера существует, ничего не делает
@@ -33,7 +32,6 @@ module.exports = async (req, res) => {
     }
     const response = await pool.query('SELECT * FROM users WHERE id = $1', [id])
     const user = response.rows[0]
-    console.log(user)
 
     res.json({username: user.username, avatar: user.avatar})
 }

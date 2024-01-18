@@ -1,5 +1,6 @@
 const express = require('express')
 const checkTokenMiddleware = require("./middlewares/checkToken.middleware");
+const isStarlightMiddleware = require('./middlewares/isStarlight.middleware');
 
 const api = express.Router();
 
@@ -87,5 +88,14 @@ api.post('/getSubscribes', getSubscribes);
 
 const isSubscribed = require('./controllers/actions/subscribe/isSubscribed.controller');
 api.post('/isSubscribed', checkTokenMiddleware, isSubscribed)
+
+const isStarlight = require('./controllers/starlight/isStarlight.controller');
+api.post('/isStarlight', checkTokenMiddleware, isStarlight);
+
+const subscribeStarlight = require('./controllers/starlight/subscribe.controller');
+api.post('/subscribeStarlight', checkTokenMiddleware, subscribeStarlight);
+
+const setGif = require('./controllers/starlight/setGifAvatar.controller');
+api.post('/setGif', isStarlightMiddleware, setGif);
 
 module.exports = api;

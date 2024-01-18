@@ -3,7 +3,6 @@ module.exports = async (req, res) => {
     const {image} = req.body;
 
     if (!image) {
-        console.log(req.body)
         return res.status(404).json("Нету изображения")
     }
 

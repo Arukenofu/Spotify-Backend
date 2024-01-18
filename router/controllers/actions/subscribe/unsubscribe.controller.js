@@ -5,7 +5,6 @@ module.exports = async (req, res) => {
 
     try {
         const data = await pool.query('INSERT INTO usersubscribes (subscriber, subscribe) VALUES ($1, $2) RETURNING id', [subscriber, subscribe]);
-        console.log(data.rows)
     } catch {
         return res.send('Уже подписан!')
     }
