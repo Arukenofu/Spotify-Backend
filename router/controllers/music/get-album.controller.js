@@ -2,7 +2,7 @@ const {pool} = require("../../../db/db.pool");
 module.exports = async (req, res) => {
     const id = req.params.id;
 
-    const response = await pool.query('SELECT jsonb_agg(album) AS serialized_result\n' +
+    const response = (await pool.query('SELECT jsonb_agg(album) AS serialized_result\n' +
         'FROM (\n' +
         '    SELECT\n' +
         '        albums.id,\n' +
@@ -15,6 +15,8 @@ module.exports = async (req, res) => {
         '        LEFT JOIN "musicdata" ON "musicdata"."id" = "albumMusics"."musicId"\n' +
         '        GROUP BY albums.id\n' +
         '        having albums.id = $1' +
-        ') AS album;', [id]);
+        ') AS album;', [id]));
+    console.log(response.rows)
 
+    res.send(response)
 }
